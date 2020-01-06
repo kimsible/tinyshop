@@ -1,0 +1,10 @@
+{
+  "name": "tinyshop",
+  "author": "kimsible",
+  "license": "AGPL-3.0",
+  "private": true,
+  "repository": "github:kimsible/tinyshop",
+  "engines": {
+    "node": ">=13.5"
+  }
+}
