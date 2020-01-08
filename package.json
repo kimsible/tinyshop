@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "next build",
-    "start": "next start"
+    "start": "node server.js"
   },
   "devDependencies": {
     "ava": "^2.4.0",
