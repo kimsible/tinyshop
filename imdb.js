@@ -5,9 +5,9 @@ const {
 } = require('fs')
 
 function load (path) {
-  const json = readFileSync(path)
-  if (!json.toString()) return false
-  const object = JSON.parse(json)
+  const buffer = readFileSync(path)
+  if (!buffer.toString()) return false
+  const object = JSON.parse(buffer)
   return object
 }
 
@@ -25,9 +25,9 @@ class IMDB {
     await writeFile('.backup', json)
 
     // Test if written backup-file is deeply equal to memory object
-    const backupJson = await readFile('.backup')
-    const backupObject = JSON.parse(backupJson)
-    deepEqual(backupObject, this[name])
+    const buffer = await readFile('.backup')
+    const object = JSON.parse(buffer)
+    deepEqual(object, this[name])
 
     // Apply backup
     await rename('.backup', path(name))
