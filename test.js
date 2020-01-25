@@ -18,7 +18,7 @@ test.before(async t => {
     await fs.access('./public/settings.json')
     settingsExists = true
   } catch {
-    await fs.writeFile('./public/settings.json', '[]')
+    await fs.writeFile('./public/settings.json', '{}')
   }
   try {
     await fs.access('./public/products.json')
@@ -26,6 +26,7 @@ test.before(async t => {
   } catch {
     await fs.writeFile('./public/products.json', '[]')
   }
+  require('./imdb')
 })
 
 test('server - run', async t => {
@@ -47,6 +48,20 @@ test('server - 404 /public/products.json', async t => {
   t.is(statusCode, 404)
 })
 
+test('imdb - loaded', async t => {
+  const imdb = require.cache[require.resolve('./imdb')].exports
+  t.is(typeof imdb.settings, 'object')
+  t.is(typeof imdb.products, 'object')
+})
+
+test('imdb - backup', async t => {
+  const imdb = require('./imdb')
+  imdb.settings = { ...imdb.settings, name: 'tinyshop' }
+  await imdb.backup('settings')
+  t.throwsAsync(async () => await fs.access('./public/settings.backup.json'), Error)
+  t.deepEqual(imdb.settings, JSON.parse(await fs.readFile('./public/settings.json')))
+})
+
 test.after.always(async () => {
   if (!settingsExists) {
     await fs.unlink('./public/settings.json')
@@ -54,4 +69,6 @@ test.after.always(async () => {
   if (!productsExists) {
     await fs.unlink('./public/products.json')
   }
+  try { await fs.unlink('./public/settings.backup.json') } catch {}
+  try { await fs.unlink('./public/products.backup.json') } catch {}
 })
