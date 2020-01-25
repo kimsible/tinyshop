@@ -6,30 +6,31 @@ const {
 
 function load (path) {
   const json = readFileSync(path)
+  if (json.toString() === 'undefined') return false
   const object = JSON.parse(json)
   return object
 }
 
+const test = process.env.NODE_ENV === 'test'
+const path = name => `./public/${name}${test ? '.test':''}.json`
+
 class IMDB {
   constructor () {
-    this.settings = load('./public/settings.json')
-    this.products = load('./public/products.json')
+    this.settings = load(path('settings')) || {}
+    this.products = load(path('products')) || []
   }
   async backup (name) {
-    const json = JSON.stringify(this[name])
-    const path = `./public/${name}.json`
-
     // Create backup-file
-    const backupPath = `./public/${name}.backup.json`
-    await writeFile(backupPath, json)
+    const json = JSON.stringify(this[name])
+    await writeFile('.backup', json)
 
     // Test if written backup-file is deeply equal to memory object
-    const backupJson = await readFile(backupPath)
+    const backupJson = await readFile('.backup')
     const backupObject = JSON.parse(backupJson)
     deepEqual(backupObject, this[name])
 
     // Apply backup
-    await rename(backupPath, path)
+    await rename('.backup', path(name))
   }
 }
 

@@ -7,13 +7,16 @@ const app = next({dev: false})
 const handle = app.getRequestHandler()
 
 module.exports = app.prepare().then(() => {
+  // Load synchronously In-memory Database to commonjs cache
+  require('./imdb')
+
   const server = createServer((req, res) => {
     // Be sure to pass `true` as the second argument to `url.parse`.
     // This tells it to parse the query portion of the URL.
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
 
-    if (['/settings.json', '/products.json', '/settings.backup.json', '/products.backup.json'].includes(pathname)) {
+    if (['/settings.json', '/products.json'].includes(pathname)) {
       app.render(req, res, '/error', query)
     } else {
       handle(req, res, parsedUrl)
