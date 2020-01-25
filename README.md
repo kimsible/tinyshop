@@ -28,7 +28,7 @@ npx standard -v
 
 ##### Development mode
 ```bash
-npx next
+node server
 ```
 
 ##### Build for production

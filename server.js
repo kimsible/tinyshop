@@ -2,8 +2,8 @@ const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
 
-const { PORT, URL } = process.env
-const app = next({dev: false})
+const { PORT, URL, NODE_ENV } = process.env
+const app = next({ dev: !['production', 'test'].includes(NODE_ENV) })
 const handle = app.getRequestHandler()
 
 module.exports = app.prepare().then(() => {
@@ -25,7 +25,7 @@ module.exports = app.prepare().then(() => {
 
   server.listen(PORT, err => {
     if (err) throw err
-    if (process.env.NODE_ENV !== 'test') {
+    if (NODE_ENV !== 'test') {
       console.log(`> Ready on ${URL || 'http://localhost'}:${server.address().port}`)
     }
   })
