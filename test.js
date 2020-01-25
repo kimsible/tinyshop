@@ -11,8 +11,8 @@ const request = path => new Promise((resolve, reject) => {
 })
 
 test.before(async () => {
-  await fs.writeFile('./public/settings.test.json')
-  await fs.writeFile('./public/products.test.json')
+  await fs.writeFile('./public/settings.test.json', '')
+  await fs.writeFile('./public/products.test.json', '')
   server = await require('./server')
 })
 

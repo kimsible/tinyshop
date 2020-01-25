@@ -6,7 +6,7 @@ const {
 
 function load (path) {
   const json = readFileSync(path)
-  if (json.toString() === 'undefined') return false
+  if (!json.toString()) return false
   const object = JSON.parse(json)
   return object
 }
