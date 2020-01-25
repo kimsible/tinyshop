@@ -25,7 +25,9 @@ module.exports = app.prepare().then(() => {
 
   server.listen(PORT, err => {
     if (err) throw err
-    console.log(`> Ready on ${URL || 'http://localhost'}:${server.address().port}`)
+    if (process.env.NODE_ENV !== 'test') {
+      console.log(`> Ready on ${URL || 'http://localhost'}:${server.address().port}`)
+    }
   })
 
   return server
