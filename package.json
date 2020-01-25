@@ -12,6 +12,7 @@
     "pre-push": "ava"
   },
   "scripts": {
+    "postinstall": "mkdir -p ./public; touch ./public/settings.json; touch ./public/products.json",
     "build": "next build",
     "start": "node server.js"
   },
