@@ -13,7 +13,7 @@ module.exports = app.prepare().then(() => {
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
 
-    if (['/settings.json', '/products.json'].includes(pathname)) {
+    if (['/settings.json', '/products.json', '/settings.backup.json', '/products.backup.json'].includes(pathname)) {
       app.render(req, res, '/error', query)
     } else {
       handle(req, res, parsedUrl)
