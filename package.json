@@ -9,9 +9,14 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "standard --fix",
+      "pre-commit": "lint-staged",
       "pre-push": "ava"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "standard --fix"
+    ]
   },
   "scripts": {
     "postinstall": "mkdir -p ./public; touch ./public/settings.json; touch ./public/products.json",
@@ -21,6 +26,7 @@
   "devDependencies": {
     "ava": "^2.4.0",
     "husky": "^4.0.0",
+    "lint-staged": "^10.0.2",
     "standard": "^14.3.1"
   },
   "dependencies": {
