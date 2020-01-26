@@ -26,12 +26,12 @@ test('server - 200 /', async t => {
 })
 
 test('server - 404 /public/settings.json', async t => {
-  const { statusCode } = await request('/public/settings.json')
+  const { statusCode } = await request('/settings.json')
   t.is(statusCode, 404)
 })
 
 test('server - 404 /public/products.json', async t => {
-  const { statusCode } = await request('/public/products.json')
+  const { statusCode } = await request('/products.json')
   t.is(statusCode, 404)
 })
 

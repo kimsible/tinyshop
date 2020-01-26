@@ -15,7 +15,8 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "standard --fix"
+      "standard --fix",
+      "./test-staged.sh"
     ]
   },
   "scripts": {
