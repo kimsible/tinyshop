@@ -8,8 +8,10 @@
     "node": ">=13.5"
   },
   "husky": {
-    "pre-commit": "standard --fix",
-    "pre-push": "ava"
+    "hooks": {
+      "pre-commit": "standard --fix",
+      "pre-push": "ava"
+    }
   },
   "scripts": {
     "postinstall": "mkdir -p ./public; touch ./public/settings.json; touch ./public/products.json",

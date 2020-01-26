@@ -12,13 +12,14 @@ function load (path) {
 }
 
 const test = process.env.NODE_ENV === 'test'
-const path = name => `./public/${name}${test ? '.test':''}.json`
+const path = name => `./public/${name}${test ? '.test' : ''}.json`
 
 class IMDB {
   constructor () {
     this.settings = load(path('settings')) || {}
     this.products = load(path('products')) || []
   }
+
   async backup (name) {
     // Create backup-file
     const json = JSON.stringify(this[name])
@@ -34,4 +35,4 @@ class IMDB {
   }
 }
 
-module.exports = new IMDB
+module.exports = new IMDB()

@@ -47,7 +47,7 @@ test('imdb - backup', async t => {
   const imdb = require('./imdb')
   imdb.settings = { ...imdb.settings, name: 'tinyshop' }
   await imdb.backup('settings')
-  t.throwsAsync(async () => await fs.access('.backup'), Error)
+  t.throwsAsync(() => fs.access('.backup'), Error)
   t.deepEqual(imdb.settings, JSON.parse(await fs.readFile('./public/settings.test.json')))
 })
 
