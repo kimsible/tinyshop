@@ -10,7 +10,7 @@ npm install
 #### Watch tests
 
 ```bash
-npx ava -v -w
+npx ava -v -w <DIRECTORY>
 ```
 
 
@@ -22,7 +22,7 @@ npx standard -v
 
 #### Git hooks
 
-**Husky** formats code on pre-commit and runs tests on pre-push.
+**Husky** formats code and runs tests for staged-files on pre-commit.
 
 #### Start app
 

@@ -7,10 +7,16 @@
   "engines": {
     "node": ">=13.5"
   },
+  "ava": {
+    "files": [
+      "server/test.js",
+      "pages/__tests__ /**",
+      "pages/api/__tests__ /**"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "ava"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
@@ -25,14 +31,14 @@
     "start": "NODE_ENV=production node server"
   },
   "devDependencies": {
-    "ava": "^2.4.0",
-    "husky": "^4.0.0",
-    "lint-staged": "^10.0.2",
+    "ava": "^3.5.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
     "standard": "^14.3.1"
   },
   "dependencies": {
-    "next": "^9.1.7",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "next": "^9.3.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   }
 }
